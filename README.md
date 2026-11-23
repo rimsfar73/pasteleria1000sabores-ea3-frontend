@@ -1,161 +1,161 @@
 # 🍰 Pastelería 1000 Sabores — Frontend EA3
 
-### Desarrollo Fullstack II · Duoc UC
+**Desarrollo Fullstack II | Duoc UC | 2026**
 
-Aplicación web de comercio electrónico desarrollada con **React y Vite**, integrada con una API REST construida en **Spring Boot** y una base de datos **PostgreSQL**.
+Aplicación web de comercio electrónico desarrollada con **React 19 y Vite 8**, integrada con una API REST en **Spring Boot 3.5.16** y persistencia mediante **PostgreSQL**.
 
-El proyecto corresponde a la evolución de Pastelería 1000 Sabores desde la EA1 y EA2 hacia una aplicación fullstack, incorporando autenticación segura, administración de productos y usuarios, gestión de inventario, carrito de compras y procesamiento simulado de pedidos.
+El proyecto evoluciona desde EA1 y EA2 hacia una solución fullstack, incorporando autenticación, administración de productos y usuarios, inventario y procesamiento simulado de pedidos.
 
----
+## Tecnologías
 
-## 1. Descripción del proyecto
-
-Pastelería 1000 Sabores es una plataforma de comercio electrónico orientada a la venta de productos de pastelería.
-
-El sistema contempla dos áreas principales:
-
-**Tienda pública**
-- Página de inicio y catálogo de productos.
-- Búsqueda, filtros y visualización de detalles.
-- Registro e inicio de sesión.
-- Carrito de compras.
-- Cotización y confirmación de pedidos.
-- Aplicación de cupones de descuento.
-- Simulación académica de pagos aprobados y rechazados.
-- Perfil de usuario e historial de pedidos.
-- Blogs, información institucional y formulario de contacto.
-
-**Panel de administración**
-- Gestión de productos.
-- Administración de usuarios.
-- Control de inventario y disponibilidad.
-- Gestión de categorías.
-- Visualización de consultas.
-- Acceso restringido según roles.
-
-El frontend consume datos del backend mediante Axios. Los procesos comerciales críticos, como cálculos de precios, descuentos, impuestos y validación de stock, se realizan en el servidor.
-
-## 2. Tecnologías utilizadas
-
-| Tecnología | Aplicación |
+| Frontend | Backend e infraestructura |
 |---|---|
-| React 19 | Interfaz basada en componentes |
-| Vite 8 | Entorno de desarrollo y compilación |
-| JavaScript / JSX | Lógica de presentación |
-| React Router | Navegación y rutas |
-| React Bootstrap | Componentes de interfaz |
-| Axios | Comunicación HTTP con API REST |
-| Karma + Jasmine | Pruebas automatizadas |
-| Istanbul | Cobertura de código |
-| Oxlint | Análisis estático |
-| Git y GitHub | Control de versiones |
+| React 19 + Vite 8 | Java 21 + Spring Boot 3.5.16 |
+| JavaScript / JSX | Spring Security + JWT |
+| React Router | JPA / Hibernate |
+| React Bootstrap | PostgreSQL 17 |
+| Axios + Context API | H2 (perfil alternativo) |
+| Karma + Jasmine + Istanbul | Flyway (migraciones SQL) |
+| Oxlint | Swagger / OpenAPI |
 
-**Backend complementario:** Spring Boot, Java 21, Spring Security, JWT, JPA, Flyway y PostgreSQL.
-
-## 3. Arquitectura
+## Arquitectura
 
 ```text
-                 USUARIO
-                    |
-                    v
-             REACT + VITE
-                    |
-        Componentes / Páginas
-                    |
-          Hooks y Context API
-                    |
-              Axios HTTP
-                    |
-                    v
-              API REST
-              Spring Boot
-                    |
-        Seguridad y servicios
-                    |
-                 JPA
-                    |
-                    v
-               PostgreSQL
+React + Vite
+    │
+    ├── Componentes, páginas y hooks
+    ├── Context API
+    │
+    ▼
+Axios / API REST
+    │
+    ▼
+Spring Boot
+    ├── Spring Security + JWT + CSRF
+    ├── Controladores y servicios
+    └── JPA / Hibernate
+             │
+             ▼
+      PostgreSQL (principal)
+      H2 (perfil alternativo)
+
+Flyway → Migraciones del esquema
 ```
 
-La arquitectura mantiene responsabilidades diferenciadas:
+**PostgreSQL** es la base principal utilizada en EA3. **H2** dispone de un perfil de configuración alternativo, pendiente de validación integral.
 
-- **Frontend:** interfaz, navegación, formularios y estado de presentación.
-- **Backend:** autenticación, autorización, reglas de negocio y persistencia.
-- **Base de datos:** almacenamiento de usuarios, productos, pedidos y registros comerciales.
+**Flyway** gestiona las migraciones del backend:
 
-## 4. Estructura del proyecto
+- `V1__esquema.sql`: esquema inicial.
+- `V2__trazabilidad_comercial_ea3.sql`: ampliación de trazabilidad comercial.
+
+Ambas migraciones fueron validadas correctamente sobre PostgreSQL.
+
+## Funcionalidades
+
+- Catálogo, búsqueda, filtros y detalle de productos.
+- Registro, autenticación y perfiles de usuario.
+- Carrito, cupones y checkout.
+- Cotización y simulación de pagos aprobados/rechazados.
+- Gestión de pedidos.
+- Panel administrativo para productos, usuarios y categorías.
+- Control de inventario persistente en PostgreSQL.
+- Blogs y formulario de contacto.
+- Autorización por roles y protección de sesiones.
+
+Las reglas comerciales críticas y la persistencia se ejecutan en Spring Boot, no en el navegador.
+
+## Estructura
 
 ```text
-pasteleria1000saboresEA3-frontend/
-|
-├── public/
-│   ├── img/
-│   └── icons.svg
-|
+frontend/
+├── public/          # Imágenes y recursos públicos
 ├── src/
-│   ├── assets/
-│   ├── components/
-│   ├── context/
-│   ├── data/
-│   ├── hooks/
-│   ├── pages/
-│   │   └── admin/
-│   ├── services/
-│   │   └── api.js
-│   ├── utils/
-│   ├── App.jsx
-│   ├── main.jsx
-│   └── router.jsx
-|
-├── test/
-│   ├── components/
-│   ├── helpers/
-│   ├── mocks/
-│   └── unit/
-|
-├── scripts/
-│   ├── build-tests.mjs
-│   ├── informe-cobertura.mjs
-│   └── verificar-cobertura-minima.mjs
-|
-├── docs/
-│   └── INFORME_COBERTURA_EA3_GENERADO.md
-|
+│   ├── components/  # Componentes reutilizables
+│   ├── context/     # Contextos React
+│   ├── data/        # Datos auxiliares
+│   ├── hooks/       # Estado y lógica
+│   ├── pages/       # Páginas públicas y admin
+│   ├── services/    # Cliente Axios
+│   └── utils/       # Validaciones y utilidades
+├── test/            # Pruebas unitarias y de componentes
+├── scripts/         # Automatización y cobertura
+├── docs/            # Evidencias de calidad
 ├── Dockerfile
 ├── nginx.conf
-├── karma.conf.cjs
-├── vite.config.js
-├── package.json
-└── README.md
+└── package.json
 ```
 
-## 5. Instalación y ejecución
+## Instalación y ejecución
 
-### Requisitos
-
-- Node.js y npm compatibles con la versión de Vite del proyecto.
-- Git.
-- Navegador web moderno.
-- Backend Spring Boot disponible para las funcionalidades conectadas.
-
-### Clonar repositorio
+**Requisitos:** Node.js compatible con Vite 8, npm y backend Spring Boot para las funciones conectadas.
 
 ```bash
 git clone https://github.com/rimsfar73/pasteleria1000sabores-ea3-frontend.git
 cd pasteleria1000sabores-ea3-frontend
-```
-
-### Instalar dependencias
-
-```bash
 npm ci
 ```
 
-### Configurar entorno
-
-Crear el archivo `.env.development` utilizando como referencia `.env.development.example`.
-
-Configurar la URL de la API:
+Configurar `.env.development`:
 
 ```env
+VITE_API_URL=http://localhost:8080/api/v1
+```
+
+Iniciar:
+
+```bash
+npm run dev
+```
+
+Generar compilación:
+
+```bash
+npm run build
+```
+
+## Pruebas y cobertura
+
+Resultados verificados el **23/11/2026**:
+
+| Indicador | Resultado |
+|---|---:|
+| Pruebas aprobadas | **246/246** |
+| Sentencias | **88,26 %** |
+| Ramas | **80,28 %** |
+| Funciones | **86,77 %** |
+| Líneas | **91,44 %** |
+| Lint | **0 errores** |
+| Build | **Exitoso** |
+
+```bash
+npm run lint
+npm run build
+npm run test:coverage
+```
+
+Las cuatro métricas de cobertura superan el umbral del 80 %.
+
+Informe: `docs/INFORME_COBERTURA_EA3_GENERADO.md`.
+
+## Estado de integración
+
+**Verificado:** autenticación administrativa, catálogo, modificación de inventario desde React y persistencia en PostgreSQL.
+
+**Pendiente de auditoría integral:** CRUD completo de productos y usuarios, checkout aprobado/rechazado y pruebas negativas de autorización.
+
+## Equipo
+
+**Duoc UC — Desarrollo Fullstack II**
+
+- Christian Quiroz Roa
+- Rimsky Farías Soto
+
+## Repositorios
+
+- **Frontend:** https://github.com/rimsfar73/pasteleria1000sabores-ea3-frontend
+- **Backend:** https://github.com/rimsfar73/pasteleria1000sabores-ea3-backend
+
+---
+
+*Proyecto académico con fines de aprendizaje y demostración. No procesa pagos reales.*
