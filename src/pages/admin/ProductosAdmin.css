@@ -1,0 +1,63 @@
+.productos-admin { max-width: 1200px; margin: 1.5rem auto; padding: 1rem; }
+.accion-nuevo { display: inline-block; padding: .6rem 1rem; margin-bottom: 1rem; background: #5d4037; color: white; border-radius: 6px; }
+.tabla-productos-contenedor { width: 100%; overflow-x: auto; }
+.productos-admin table { width: 100%; border-collapse: collapse; }
+.productos-admin th, .productos-admin td { padding: .7rem; border-bottom: 1px solid #ddd; text-align: left; }
+.acciones-producto { display: flex; gap: .65rem; flex-wrap: wrap; }
+.acciones-producto button { cursor: pointer; }
+@media(max-width: 640px) { .productos-admin { padding: .6rem; } .productos-admin th, .productos-admin td { padding: .4rem; } }
+
+/* Acciones uniformes para cada producto */
+.productos-admin .acciones-producto {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 6px;
+}
+
+.productos-admin .accion-producto-boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 7px 12px;
+  border: 1px solid #854a37;
+  border-radius: 6px;
+  background-color: #854a37;
+  color: #ffffff;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.productos-admin .accion-producto-boton:hover {
+  background-color: #683725;
+  border-color: #683725;
+  color: #ffffff;
+}
+
+.productos-admin .accion-producto-eliminar {
+  background-color: #fff0ed;
+  border-color: #e8b4ac;
+  color: #b42318;
+}
+
+.productos-admin .accion-producto-eliminar:hover {
+  background-color: #fbdcd7;
+  border-color: #d89a90;
+  color: #931b12;
+}
+
+.productos-admin .accion-producto-boton:focus-visible {
+  outline: 3px solid #b8754f;
+  outline-offset: 2px;
+}
+
+/* Mantener las acciones juntas en pantallas pequeñas */
+.productos-admin .tabla-productos-contenedor {
+  overflow-x: auto;
+}

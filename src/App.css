@@ -1,0 +1,85 @@
+/* Estilos globales de la aplicación */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Roboto, sans-serif;
+  background-color: #fafafa;
+  color: #333;
+}
+
+/* Contenedor principal */
+main {
+  padding: 2rem 1rem;
+  min-height: 70vh;
+}
+
+/* Encabezado y pie de página coherentes */
+/* Evita aplicar fondos y sombras a encabezados internos. */
+body > #root > header,
+body > #root > footer {
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* Links del router */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Reset básico */
+* {
+  box-sizing: border-box;
+}
+/* Aquí agregaremos los estilos de distribución general de la aplicación. */
+
+
+/* Estructura general: mantiene el footer al final de la página. */
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* Contenedor compartido de todas las rutas. */
+.contenido-principal {
+  flex: 1 0 auto;
+  width: 100%;
+  min-height: 0;
+}
+
+/* El footer conserva su diseño y queda después del contenido. */
+.pie-pagina {
+  flex-shrink: 0;
+  width: 100%;
+}
+
+/* Distribución del contenido y footer compartido */
+.estructura-aplicacion {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+}
+
+.estructura-aplicacion > .contenido-principal {
+  flex: 1 0 auto;
+  min-height: 0;
+}
+
+.estructura-aplicacion > .pie-pagina {
+  flex-shrink: 0;
+  width: 100%;
+}
+
+/* Páginas conectadas a la API. */
+.ea3-pagina {max-width:1100px;margin:2rem auto;padding:1.5rem;}
+.ea3-resumen {background:#fff5ed;padding:1.5rem;border-radius:12px;margin:1rem 0;}
+.ea3-menu {display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;background:#844b35;color:white;padding:1.5rem;}
+.ea3-menu nav {display:flex;gap:1rem;flex-wrap:wrap;align-items:center;}
+.ea3-menu a {color:white;}
+.ea3-pagina button {background:#844b35;color:white;border:0;padding:.6rem 1rem;border-radius:5px;}
+button:disabled {opacity:.5;cursor:not-allowed;}

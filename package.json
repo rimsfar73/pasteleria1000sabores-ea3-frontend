@@ -1,0 +1,41 @@
+{
+  "name": "tienda-react",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "oxlint src test",
+    "preview": "vite preview",
+    "test": "node scripts/build-tests.mjs && karma start karma.conf.cjs",
+    "test:coverage": "node scripts/build-tests.mjs --coverage && karma start karma.conf.cjs && node scripts/informe-cobertura.mjs && node scripts/verificar-cobertura-minima.mjs",
+    "report:coverage": "node scripts/informe-cobertura.mjs",
+    "coverage:gate": "node scripts/verificar-cobertura-minima.mjs"
+  },
+  "dependencies": {
+    "axios": "^1.13.2",
+    "bootstrap": "^5.3.8",
+    "react": "^19.2.8",
+    "react-bootstrap": "^2.10.10",
+    "react-dom": "^19.2.8",
+    "react-router-dom": "^7.18.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.29.7",
+    "@babel/plugin-syntax-jsx": "^7.29.7",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "@vitejs/plugin-react": "^6.1.1",
+    "babel-plugin-istanbul": "^7.0.1",
+    "esbuild": "^0.28.2",
+    "esbuild-plugin-babel": "^0.2.3",
+    "jasmine-core": "^7.0.2",
+    "karma": "^6.4.4",
+    "karma-chrome-launcher": "^3.2.0",
+    "karma-coverage": "^2.2.1",
+    "karma-jasmine": "^5.1.0",
+    "oxlint": "^1.81.0",
+    "vite": "^8.3.0"
+  }
+}
