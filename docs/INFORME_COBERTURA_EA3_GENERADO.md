@@ -1,6 +1,6 @@
-# Informe de cobertura frontend EA3 — 2026-11-23
+# Informe de cobertura frontend EA3 — 2026-11-24
 
-**Integrantes:** Christian Quiroz Roa · Rimsky Farías Soto · Lucía Salazar Delgado
+**Integrantes:** Christian Quiroz Roa · Rimsky Farías Soto
 
 **Fuente:** frontend/coverage/coverage-summary.json, generado por npm run test:coverage sobre el código actual.
 
