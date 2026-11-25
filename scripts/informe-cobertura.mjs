@@ -15,7 +15,7 @@ if (!tot || !['statements','branches','functions','lines'].every(k=>tot[k]?.pct 
   process.exit(2);
 }
 const today = new Date().toISOString().slice(0,10);
-const team = ['Christian Quiroz Roa','Rimsky Farías Soto','Lucía Salazar Delgado'];
+const team = ['Christian Quiroz Roa','Rimsky Farías Soto'];
 const md = `# Informe de cobertura frontend EA3 — ${today}
 
 `+
