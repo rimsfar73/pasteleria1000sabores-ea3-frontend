@@ -24,7 +24,7 @@ export default function DetalleProducto({ productos = [] }) {
         <p><strong>Personalizable:</strong> {producto.personalizable ? "Sí" : "No"}</p>
         <Link to="/productos" className="detalle-producto-volver">← Volver al catálogo</Link>
       </div>
-      {producto.imagen && <img src={producto.imagen} alt={producto.nombre} className="detalle-producto-imagen" />}
+      <img src={producto.imagen || "/img/producto-sin-imagen.svg"} alt={producto.nombre} className="detalle-producto-imagen" onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = "/img/producto-sin-imagen.svg"; }} />
     </main>
   );
 }

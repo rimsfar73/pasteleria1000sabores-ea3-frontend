@@ -87,7 +87,7 @@ export default function Login() {
             )}
             <Link
               className="login-boton login-boton-principal"
-              to={esAdmin ? "/admin/usuarios" : "/productos"}
+              to={esAdmin ? "/admin" : "/productos"}
             >
               {esAdmin ? "Ir a Administración" : "Ir al catálogo"}
             </Link>

@@ -5,7 +5,7 @@ import "./EditarUsuario.css";
 export default function EditarUsuario() { const { id } = useParams(); const { usuarios, actualizar } = useUsuarios(); const navegar = useNavigate(); const usuario = usuarios.find(u => u.id === id);
   if (!usuario) return <section className="lucia-contenedor"><h1>Usuario no encontrado</h1><Link to="/admin/usuarios">Volver</Link></section>;
   async function enviar(datos) { const r = await actualizar(id, datos); if (r.ok) navegar("/admin/usuarios"); return r; }
-  return <section className="lucia-contenedor"><h1>Editar usuario</h1><FormularioUsuario inicial={usuario} enviar={enviar} editar administrador/><div className="editar-usuario-acciones">
+  return <section className="lucia-contenedor"><h1>Editar usuario</h1><FormularioUsuario inicial={usuario} enviar={enviar} editar administrador bloquearRun/><div className="editar-usuario-acciones">
     <Link
       to="/admin/usuarios"
       className="editar-usuario-volver"

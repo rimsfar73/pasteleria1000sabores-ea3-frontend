@@ -52,17 +52,16 @@ function MenuActual({
   const esAdministracion =
     pathname === "/admin" || pathname.startsWith("/admin/");
 
-  if (esAdministracion) {
-    return ["admin", "vendedor"].includes(sesion?.rol) ? <MenuAdmin /> : null;
-  }
-
   return (
-    <Encabezado
-      abrirCarrito={abrirCarrito}
-      cantidadTotal={cantidadTotal}
-      sesion={sesion}
-      onCerrarSesion={onCerrarSesion}
-    />
+    <>
+      <Encabezado
+        abrirCarrito={abrirCarrito}
+        cantidadTotal={cantidadTotal}
+        sesion={sesion}
+        onCerrarSesion={onCerrarSesion}
+      />
+      {esAdministracion && ["admin", "vendedor"].includes(sesion?.rol) && <MenuAdmin />}
+    </>
   );
 }
 
@@ -75,7 +74,11 @@ function SoloCliente({ sesion, children, destino = "/checkout" }) {
         replace
         state={{
           from: destino,
-          aviso: "Inicia sesión como cliente para finalizar tu compra.",
+          aviso: destino === "/perfil"
+            ? "Inicia sesión nuevamente para acceder a tu perfil."
+            : destino === "/pedidos"
+              ? "Inicia sesión para consultar tus pedidos."
+              : "Inicia sesión como cliente para finalizar tu compra.",
         }}
       />
     );
@@ -292,7 +295,7 @@ function Router({
           />
 
           <Route path="/pedidos" element={<SoloCliente sesion={sesion} destino="/pedidos"><Pedidos /></SoloCliente>} />
-          <Route path="/pedidos/:id" element={<SoloCliente sesion={sesion}><Pedidos /></SoloCliente>} />
+          <Route path="/pedidos/:id" element={<SoloCliente sesion={sesion} destino="/pedidos"><Pedidos /></SoloCliente>} />
           <Route path="/admin/pedidos" element={<SoloGestion sesion={sesion}><Pedidos gestion /></SoloGestion>} />
           <Route path="/admin/pedidos/:id" element={<SoloGestion sesion={sesion}><Pedidos gestion /></SoloGestion>} />
           <Route path="/admin/consultas" element={<SoloAdmin sesion={sesion}><ConsultasAdmin /></SoloAdmin>} />

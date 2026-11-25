@@ -68,8 +68,19 @@ describe("EA3 V6 · catálogo, contenido y pedidos HTTP", () => {
     expect(e.nodo.textContent).not.toContain('Torta chocolate');
   });
   it("categoría filtra el listado",async()=>{
+    responder = cfg => cfg.url === "/categorias"
+      ? ["Tortas Cuadradas", "Postres Individuales", "holi"]
+      : [];
+
     await e.montar(<Productos productos={[producto,{...producto,codigo:'PI001',nombre:'Cheesecake',categoria:'Postres Individuales'}]} agregarAlCarrito={()=>{}}/>);
-    await e.escribir(e.nodo.querySelector('#categoria-select'),'Postres Individuales');
+
+    const selector = e.nodo.querySelector('#categoria-select');
+
+    expect([...selector.options].map(opcion => opcion.value)).toContain("holi");
+    expect([...selector.options].map(opcion => opcion.value)).toContain("Postres Individuales");
+
+    await e.escribir(selector,'Postres Individuales');
+
     expect(e.nodo.textContent).toContain('Cheesecake');
     expect(e.nodo.textContent).not.toContain('Torta chocolate');
   });
@@ -103,6 +114,17 @@ describe("EA3 V6 · catálogo, contenido y pedidos HTTP", () => {
     expect(e.nodo.textContent).toContain('Mis pedidos');
     expect(e.nodo.querySelector('a[href="/pedidos/PED1"]')).not.toBeNull();
     expect(llamadas.some(c=>c.url==='/pedidos')).toBeTrue();
+  });
+  it("pedidos acepta una respuesta paginada",async()=>{
+    responder=()=>({content:[pedido],totalElements:1});
+    await e.montar(<Pedidos/>,{ruta:'/pedidos'});
+    expect(e.nodo.querySelector('a[href="/pedidos/PED1"]')).not.toBeNull();
+  });
+  it("pedidos muestra error para respuesta no reconocida",async()=>{
+    responder=()=>({mensaje:'respuesta inesperada'});
+    await e.montar(<Pedidos/>,{ruta:'/pedidos'});
+    expect(e.nodo.querySelector('[role="alert"]')).not.toBeNull();
+    expect(e.nodo.textContent).toContain('No se pudo interpretar');
   });
   it("pedidos vacío informa ausencia de compras",async()=>{
     responder=()=>[];
