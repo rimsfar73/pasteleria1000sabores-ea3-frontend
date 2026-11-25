@@ -51,7 +51,7 @@ function TarjetaProducto({ producto, agregarAlCarrito }) {
       className={`tarjeta-producto ${disponible ? "" : "no-disponible"}`}
     >
       {/* Imagen y descripción del producto. */}
-      <img src={imagen} alt={nombre} />
+      <img src={imagen || "/img/producto-sin-imagen.svg"} alt={nombre} onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = "/img/producto-sin-imagen.svg"; }} />
       <h3>{nombre}</h3>
       <p className="categoria">{categoria}</p>
       <p className="precio">{formatoPrecio(precio)}</p>

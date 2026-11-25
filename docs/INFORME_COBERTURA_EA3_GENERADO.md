@@ -1,4 +1,4 @@
-# Informe de cobertura frontend EA3 — 2026-11-24
+# Informe de cobertura frontend EA3 — 2026-11-25
 
 **Integrantes:** Christian Quiroz Roa · Rimsky Farías Soto
 
@@ -6,10 +6,10 @@
 
 | Métrica | Porcentaje |
 |---|---:|
-| Sentencias | 88.26% |
-| Ramas | 80.28% |
-| Funciones | 86.77% |
-| Líneas | 91.44% |
+| Sentencias | 87.71% |
+| Ramas | 80.17% |
+| Funciones | 85.60% |
+| Líneas | 91.25% |
 
 ## Referencia histórica EA2 (no sustituye estas mediciones)
 - Encargo EA2: 132 pruebas aprobadas, 58,9% de sentencias, 54,4% de ramas, según retroalimentación del docente del 19/11/2026.

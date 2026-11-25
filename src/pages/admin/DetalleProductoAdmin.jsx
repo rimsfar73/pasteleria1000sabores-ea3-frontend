@@ -57,9 +57,10 @@ export default function DetalleProductoAdmin({ productos = [] }) {
           <div className="detalle-admin-imagen-contenedor">
             {producto.imagen ? (
               <img
-                src={producto.imagen}
+                src={producto.imagen || "/img/producto-sin-imagen.svg"}
                 alt={producto.nombre}
                 className="detalle-admin-imagen"
+                onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = "/img/producto-sin-imagen.svg"; }}
               />
             ) : (
               <div className="detalle-admin-sin-imagen">

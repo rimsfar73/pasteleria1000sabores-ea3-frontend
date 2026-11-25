@@ -54,15 +54,6 @@ function Encabezado({ abrirCarrito, cantidadTotal, sesion = null, onCerrarSesion
             <Nav.Link as={NavLink} className="encabezado-enlace" to="/contacto" eventKey="contacto">
               Contacto
             </Nav.Link>
-            {["admin", "vendedor"].includes(sesion?.rol) && (
-              <Nav.Link
-                as={NavLink} className="encabezado-enlace"
-                to="/admin/productos"
-                eventKey="administracion"
-              >
-                Administración
-              </Nav.Link>
-            )}
 
             {!sesion && (
               <Nav.Link as={NavLink} className="encabezado-enlace" to="/registro" eventKey="registro">
@@ -79,7 +70,7 @@ function Encabezado({ abrirCarrito, cantidadTotal, sesion = null, onCerrarSesion
 
             <Nav.Link
               as={NavLink} className="encabezado-enlace"
-              to={sesion?.rol === "cliente" ? "/perfil" : ["admin", "vendedor"].includes(sesion?.rol) ? "/admin/productos" : "/login"}
+              to={sesion?.rol === "cliente" ? "/perfil" : sesion?.rol === "admin" ? "/admin" : sesion?.rol === "vendedor" ? "/admin/productos" : "/login"}
               eventKey="login"
             >
               {sesion?.rol === "cliente" ? "Mi perfil" : ["admin", "vendedor"].includes(sesion?.rol) ? "Administración" : "Ingresar"}
